@@ -1,4 +1,4 @@
-#Solutions of Problems Given in Project Euler
+# Solutions of Problems Given in Project Euler
 
 Note: All problems are solved in PYTHON
 
