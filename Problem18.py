@@ -51,5 +51,5 @@ triangle=[
 for r in range(len(triangle)-1,0,-1):
     for c in range(0,r):
         triangle[r-1][c]+=max(triangle[r][c],triangle[r][c+1])
-print(triangle)
+
 print("The maximum sum is ",triangle[0][0])
