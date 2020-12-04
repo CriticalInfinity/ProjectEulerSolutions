@@ -7,39 +7,27 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 '''
+from math import sqrt
 
 def SumOfProperFactors(n):
-    sum=1
-    if n==1:
-        return 0
-    i=2
-    while i*i<=n:
-        if n%i==0:
-            l=n//i
-            if i%2==0 or l%2==0:
-                if l==i: 
-                    sum+=i
-                else:
-                    sum+=i+l
-        i+=1            
-    return sum
+    factors=[1]
+    for x in range(2,int(sqrt(n))+1):
+        if n%x==0:
+            factors.extend([n//x,x])    
+    return set(factors) #to sort it
 
 abundantNum=[]
 #Since all number greater than 20162 can be written as the sum of two abundant number
 #So it is not required to check numbers greater than 20162
 def abundantNums():
     for x in range(12,20163): #Since 12 is the smallest abundant number we will start the loop from 12
-        if x<SumOfProperFactors(x):
+        if x<sum(SumOfProperFactors(x)):
             abundantNum.append(x)
 
-if 20160<SumOfProperFactors(20160):
-    print("True")
-
 abundantNums()
-print(abun)
 sum=1
 arr=set(abundantNum) 
-for n in range(2, 20162):
+for n in range(2, 20163):
     flag = True
     for k in abundantNum:
         if k < n:
@@ -50,8 +38,5 @@ for n in range(2, 20162):
             break
     if flag: 
         sum += n
-
-
-
 
 print("The sum of all positive intergers that cannot be written as the sum of two abundant numbers is ",sum)
