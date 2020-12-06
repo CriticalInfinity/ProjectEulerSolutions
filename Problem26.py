@@ -14,40 +14,22 @@ Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be see
 
 Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 '''
-from math import sqrt
+def prime_sieve(n):#For finding primes
+    sieve = [True] * (n//2)
+    for i in range(3,int(n**0.5)+1,2):
+        if sieve[i//2]:
+            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
+    return [2] + [2*i+1 for i in range(1,n//2) if sieve[i]]
+print(prime_sieve(1000))
+def f(N):
+    if N < 8: return 3
+    for d in prime_sieve(N)[::-1]:
+        k = d//2
+        while pow(10, k, d) != 1:  
+             k+= 1
+             if d-1 == k: 
+                return d
 
-limit=int(input("Enter the limit under which you want to find the longest recurring cycle \n"))
-
-length=0 #Stores the length of the longest recurring cycle
-num=0
-
-def PrimeChecker(n):
-    if n==1:
-        return False
-    for x in range(2,int(sqrt(n))+1):
-        if n%x==0:
-            return False
-    return True
-
-primes=[]
-for x in range(2,limit):
-    if PrimeChecker(x):
-        primes.append(x)
-primes.reverse()
-
-for x in primes:
-    if length>x:
-        break
-    rem=[0 for y in range(x)]
-    val=1
-    pos=0
-    while rem[val]==pos and val!=0:
-        rem[val]=pos
-        val*=10
-        val%=x
-        pos+=1
-    if pos-rem[val]>length:
-        length=pos-rem[val]
-        num=x
-
-print(num," is the number with the longest recurring cycle")
+N = int(input('The longest recurring cycle for 1/d where d < '))
+d = f(N)
+print ("The longest repeating decimal is for " ,d)
