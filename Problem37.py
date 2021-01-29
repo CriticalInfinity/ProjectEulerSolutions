@@ -5,13 +5,11 @@ Find the sum of the only eleven primes that are both truncatable from left to ri
 
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 '''
-import time
-a={1,2,3,5,7,9}
-cnt=0
+cnt=0 #count
 i=10
-sum=0
-def IsPrime(num):
-    if num==1:
+sum=0# holds sum
+def IsPrime(num): #checks if a number is prime or not
+    if num<=1:
         return False
     h=2
     while h*h<=num:
@@ -21,30 +19,30 @@ def IsPrime(num):
     return True
 
 while cnt<11:
-    truncable=True
+    truncable=True#stores truncable status
     t=i
-    while t>0:
-        if not(IsPrime(t)):
+    while t>0:#checks if a number is left trucable
+        if not(IsPrime(t)):#checks if t is prime
             truncable=False
             break
-        t=t//10
-    if not(truncable):
+        t=t//10 #removes the last digit of t
+    if not(truncable):#to skip following code if the number is not left truncabe
         i=i+1
         continue
     t=i
     x=t%10
     k=1
-    while t>0:
+    while t>0:# checks whether the number is right trucable
         if not(IsPrime(x)):
             truncable=False
             break
         t=t//10
         x=x+t%10*(10**k)
         k+=1
-    if not(truncable):
-        i+=1
+    if not(truncable):#skips the following code if the number is not right trucable
+        i+=1#increases the value of i by one
         continue
-    sum=sum+i
-    cnt+=1
+    sum=sum+i#if the number is trucable from both sides then the number is added to the sum
+    cnt+=1#increases the counter
     i+=1
 print("The sum is",sum)
