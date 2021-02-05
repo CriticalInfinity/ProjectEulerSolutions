@@ -11,7 +11,7 @@ d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
 '''
 i=1
 d=1
-cnt=0
+cnt=0 #cnt keeps track of the number of digits 
 pro=1
 while d<=1000000:
     cnt+=len(str(i))
